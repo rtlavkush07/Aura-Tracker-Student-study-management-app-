@@ -14,7 +14,7 @@ const CourseSchedules = () => {
 
     const userData = async () => {
       try {
-        const response = await axios.get("/api/user/profile", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data);
@@ -34,7 +34,7 @@ const CourseSchedules = () => {
           console.log("course id in course schedule = " + courseid);
 
           // Use POST request and send courseId in the request body
-          const response = await axios.get(`/api/student/course/${courseid}`);
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/course/${courseid}`);
           setCourseSchedule(response.data.courseSchedule);
           console.log(response.data.courseSchedule);
         }
