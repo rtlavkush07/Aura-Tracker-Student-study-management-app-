@@ -9,7 +9,7 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:5000",
         changeOrigin: true,
-           "https://your-frontend.onrender.com", // deployed frontend
+           "https://your-frontend.onrender.com", 
       },
     },
   },
