@@ -15,7 +15,7 @@ const AddCourse = ({ onSubmit }) => {
 
     };
     try {
-      const response = await axios.post("/api/admin/addCourse", courseData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/addCourse`, courseData);
       console.log(response.data);
       navigate('/admin');
     } catch (error) {
