@@ -29,9 +29,9 @@ const AdminDashboard = () => {
     const fetchAllData = async () => {
       try {
         const [studentsRes, teachersRes, coursesRes] = await Promise.all([
-          axios.get("/api/student/getAllStudents"),
-          axios.get("/api/admin/getAllTeacher"),
-          axios.get("/api/admin/getAllCourse"),
+          axios.get("`${import.meta.env.VITE_API_URL}/student/getAllStudents`),
+          axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllTeacher`),
+          axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllCourse`),
         ]);
 
         setStudents(studentsRes.data);
