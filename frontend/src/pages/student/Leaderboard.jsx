@@ -14,7 +14,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("/api/user/profile", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (response.data) {
@@ -33,7 +33,7 @@ const Leaderboard = () => {
 
   const getCourseName = async (user) => {
     try {
-      const response = await axios.get(`/api/student/course/${user.course}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/course/${user.course}`);
       setCourseName(response.data.courseName);
       console.log(response);
     } catch (error) {
@@ -48,7 +48,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchAllStudents = async () => {
       try {
-        const response = await axios.get("/api/student/getAllStudents");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/getAllStudents`);
         setLeaderboardData(response.data);
       } catch (error) {
         console.error("Failed to fetch all students:", error);
