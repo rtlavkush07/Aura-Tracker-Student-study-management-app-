@@ -7,7 +7,7 @@ const AllStudent = () => {
   useEffect(() => {
     const fetchAllStudents = async () => {
       try {
-        const response = await axios.get('/api/student/getAllStudents');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/getAllStudents`);
         setStudents(response.data);
         // console.log(response.data)
       } catch (error) {
