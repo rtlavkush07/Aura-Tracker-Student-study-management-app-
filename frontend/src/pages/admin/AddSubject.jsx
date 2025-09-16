@@ -15,7 +15,7 @@ const AddSubject = ({ onSubmit }) => {
     // Separate function to fetch teachers
     const fetchTeachers = async () => {
         try {
-            const response = await axios.get("/api/admin/getAllTeacher");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllTeacher`);
             setTeachers(response.data);
         } catch (error) {
             console.error("Failed to fetch teachers:", error);
@@ -25,7 +25,7 @@ const AddSubject = ({ onSubmit }) => {
     // Separate function to fetch courses
     const fetchCourses = async () => {
         try {
-            const response = await axios.get("/api/admin/getAllCourse");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllCourse`);
             setCourses(response.data);
         } catch (error) {
             console.error("Failed to fetch courses:", error);
@@ -64,7 +64,7 @@ const AddSubject = ({ onSubmit }) => {
             selectedCourse,
         };
         try {
-            const response = await axios.post("/api/admin/addSubject", subjectData);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/addSubject`, subjectData);
             console.log(response.data);
             navigate('/admin');
         } catch (error) {
