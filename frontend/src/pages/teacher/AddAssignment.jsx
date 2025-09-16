@@ -24,7 +24,7 @@ const AddAssignment = () => {
   useEffect(() => {
     const fetchTeacherProfile = async () => {
       try {
-        const response = await axios.get("/api/user/teacher/profile", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token for auth if required
           },
@@ -81,7 +81,7 @@ const AddAssignment = () => {
     const fetchSubjects = async () => {
       try {
         if (teacherId) {
-          const response = await axios.get(`/api/teacher/getSubjects/${teacherId}`);
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/teacher/getSubjects/${teacherId}`);
           setSubjects(response.data);
         }
       } catch (error) {
@@ -116,7 +116,7 @@ const AddAssignment = () => {
     try {
       console.log(assignmentData)
       console.log('Adding assignment fucntion putting post request');
-      const url = `/api/teacher/${teacherId}/${subjectId}/addAssignment`;
+      const url =`${import.meta.env.VITE_API_URL}/teacher/${teacherId}/${subjectId}/addAssignment`;
       const response = await axios.post(url, assignmentData);
       console.log('Assignment added successfully:', response.data);
       alert('Assignment added successfully');
