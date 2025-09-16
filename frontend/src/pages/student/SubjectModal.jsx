@@ -17,7 +17,7 @@ const SubjectModal = () => {
   useEffect(() => {
     const fetchSubject = async () => {
       try {
-        const response = await axios.get(`/api/student/getsubject/${subjectId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/getsubject/${subjectId}`);
         setSubject(response.data);
         console.log("subject data =", JSON.stringify(response.data));
       } catch (err) {
@@ -39,7 +39,7 @@ const SubjectModal = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("/api/user/profile", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserId(response.data._id);
@@ -55,7 +55,7 @@ const SubjectModal = () => {
   useEffect(() => {
     const fetchCompletedChapters = async () => {
       try {
-        const response = await axios.get(`/api/student/getCompletedChapters/${userId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/getCompletedChapters/${userId}`);
         setCompletedChapters(response.data);
         console.log("completed chapter = " + completedChapters)
       } catch (err) {
@@ -71,7 +71,7 @@ const SubjectModal = () => {
   const handleCompleteChapter = async (chapterId, moduleId, auracoin, ratingpoint) => {
     console.log(`Completing chapterID: ${chapterId}, Module ID: ${moduleId}, Subject ID: ${subjectId}, auracoin: ${auracoin}, ratingpoint: ${ratingpoint}`);
     try {
-      const response = await axios.post(`/api/student/completechapter/${userId}/${chapterId}/${moduleId}/${subjectId}/${auracoin}/${ratingpoint}`);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/student/completechapter/${userId}/${chapterId}/${moduleId}/${subjectId}/${auracoin}/${ratingpoint}`);
       console.log("Chapter completed successfully:", response.data);
 
       // Update the state to mark the chapter as completed
