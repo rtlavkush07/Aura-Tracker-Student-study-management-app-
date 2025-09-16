@@ -19,7 +19,7 @@ const AddTeacher = ({ onSubmit, availableSubjects }) => {
 
         };
         try {
-            const response = await axios.post("/api/admin/addTeacher", teacherData); // replace with correct endpoint
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/addTeacher`, teacherData); // replace with correct endpoint
             console.log(response.data); // Check if teacher added successfully
             navigate('/admin'); // Redirect to teachers list or dashboard
         } catch (error) {
