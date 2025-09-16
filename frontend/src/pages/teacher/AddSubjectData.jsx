@@ -15,7 +15,7 @@ const AddSubjectData = () => {
     useEffect(() => {
         const fetchTeacherProfile = async () => {
             try {
-                const response = await axios.get("/api/user/teacher/profile", {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token for auth if required
                     },
@@ -33,7 +33,7 @@ const AddSubjectData = () => {
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
-                const response = await axios.get(`/api/teacher/getSubjects/${teacherId}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/teacher/getSubjects/${teacherId}`);
 
 
                 setSubjects(response.data);
@@ -73,7 +73,7 @@ const AddSubjectData = () => {
 
         try {
             setLoading(true);
-            await axios.put(`/api/teacher/${selectedSubject}/modules`, { modules: [moduleData] });
+            await axios.put(`${import.meta.env.VITE_API_URL}/teacher/${selectedSubject}/modules`, { modules: [moduleData] });
             alert('Module and chapters added successfully');
             setModuleName('');
             setChapters([]);
