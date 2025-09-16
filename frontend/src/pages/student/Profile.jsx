@@ -11,7 +11,7 @@ const Profile = () => {
   const [courseName, setCourseName] = useState();
   const getCourseName = async (user) => {
     try {
-      const response = await axios.get(`/api/student/course/${user.course}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/course/${user.course}`);
       setCourseName(response.data.courseName);
       console.log(response);
     } catch (error) {
@@ -26,7 +26,7 @@ const Profile = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("/api/user/profile", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         await getCourseName(response.data);
