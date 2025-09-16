@@ -8,7 +8,7 @@ const TeacherProfile = () => {
   useEffect(() => {
     const fetchTeacherProfile = async () => {
       try {
-        const response = await axios.get("/api/user/teacher/profile", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token for auth if required
           },
