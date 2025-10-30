@@ -44,7 +44,7 @@ const CourseSubjects = () => {
       const fetchSubjects = async () => {
         try {
           const response = await api.get(
-            "/student/getCourseSubjects/${userId}/${courseId}",
+            `/student/getCourseSubjects/${userId}/${courseId}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
