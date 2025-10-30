@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import api from "../../api.js";
+
 const AddCourse = ({ onSubmit }) => {
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
@@ -15,7 +17,7 @@ const AddCourse = ({ onSubmit }) => {
 
     };
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/addCourse`, courseData);
+      const response = await api.post("/admin/addCourse", courseData);
       console.log(response.data);
       navigate('/admin');
     } catch (error) {

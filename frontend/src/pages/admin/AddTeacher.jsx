@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import api from "../../api.js";
 const AddTeacher = ({ onSubmit, availableSubjects }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const AddTeacher = ({ onSubmit, availableSubjects }) => {
 
         };
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/addTeacher`, teacherData); // replace with correct endpoint
+            const response = await api.post("/admin/addTeacher", teacherData); // replace with correct endpoint
             console.log(response.data); // Check if teacher added successfully
             navigate('/admin'); // Redirect to teachers list or dashboard
         } catch (error) {

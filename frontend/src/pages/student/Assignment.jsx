@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import api from "../../api.js";
 // Modal component to display assignment content
 const Modal = ({ isOpen, onClose, content }) => {
     if (!isOpen) return null;
@@ -43,7 +44,7 @@ const Assignment = () => {
         }
         const fetchProfileData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+                const response = await api.get("/user/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUserData(response.data);
@@ -61,8 +62,8 @@ const Assignment = () => {
         if (userId && courseId) {
             const fetchSubjects = async () => {
                 try {
-                    const response = await axios.get(
-                        `/api/student/getSubjectPendingAssessment/${userId}/${courseId}`,
+                    const response = await api.get(
+                        `/student/getSubjectPendingAssessment/${userId}/${courseId}`,
                         {
                             headers: { Authorization: `Bearer ${token}` },
                         }
@@ -86,8 +87,8 @@ const Assignment = () => {
             console.log("fileLink " + fileLink);
             console.log("subject Id = " + subjectId);
             console.log("assignment Id = " + assignmentId);
-            const response = await axios.post(
-                `/api/student/uploadAssignment`,
+            const response = await api.post(
+                `/student/uploadAssignment`,
                 {
                     userId,
                     assignmentId,

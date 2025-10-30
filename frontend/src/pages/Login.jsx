@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, setError } from "../features/authSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../api.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { email, password, role: userRole });
+      const response = await api.post("/auth/login", { email, password, role: userRole });
       const { token, role, id } = response.data;
       
       localStorage.setItem("token", token);

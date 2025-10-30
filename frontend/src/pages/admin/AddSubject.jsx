@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+import api from "../../api.js";
 const AddSubject = ({ onSubmit }) => {
     const [teachers, setTeachers] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -15,7 +15,7 @@ const AddSubject = ({ onSubmit }) => {
     // Separate function to fetch teachers
     const fetchTeachers = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllTeacher`);
+            const response = await api.get("/admin/getAllTeacher");
             setTeachers(response.data);
         } catch (error) {
             console.error("Failed to fetch teachers:", error);
@@ -25,7 +25,7 @@ const AddSubject = ({ onSubmit }) => {
     // Separate function to fetch courses
     const fetchCourses = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllCourse`);
+            const response = await api.get("/admin/getAllCourse");
             setCourses(response.data);
         } catch (error) {
             console.error("Failed to fetch courses:", error);
@@ -64,7 +64,7 @@ const AddSubject = ({ onSubmit }) => {
             selectedCourse,
         };
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/addSubject`, subjectData);
+            const response = await api.post("/admin/addSubject", subjectData);
             console.log(response.data);
             navigate('/admin');
         } catch (error) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import api from "../../api.js";
 
 const products = [
   {
@@ -85,7 +85,7 @@ const Store = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("/api/user/profile", {
+        const response = await api.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -107,8 +107,8 @@ const Store = () => {
       try {
         console.log("start reedming")
         console.log("userid"+userId)
-        const response = await axios.post(
-          "/api/store/redeem",
+        const response = await api.post(
+          "/store/redeem",
           {
             userId /* add logic to get user ID */,
             itemName:product.title,

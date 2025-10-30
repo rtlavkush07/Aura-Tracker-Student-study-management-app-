@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from "../../api.js";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -61,7 +62,7 @@ const Signup = () => {
   // Separate function to fetch courses
   const fetchCourses = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllCourse`);
+      const response = await api.get("/admin/getAllCourse");
       setCourses(response.data);
       console.log(courses);
     } catch (error) {
@@ -81,7 +82,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
+      const response = await api.post("/auth/signup", {
         email,
         name,
         profilePicture,
