@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import api from "../../api.js";
+
 const CourseSchedules = () => {
   const [courseSchedule, setCourseSchedule] = useState(null);
   const [courseid, setCourseid] = useState();
@@ -14,7 +16,7 @@ const CourseSchedules = () => {
 
     const userData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+        const response = await api.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data);
@@ -34,7 +36,7 @@ const CourseSchedules = () => {
           console.log("course id in course schedule = " + courseid);
 
           // Use POST request and send courseId in the request body
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/course/${courseid}`);
+          const response = await api.get("/student/course/${courseid}");
           setCourseSchedule(response.data.courseSchedule);
           console.log(response.data.courseSchedule);
         }

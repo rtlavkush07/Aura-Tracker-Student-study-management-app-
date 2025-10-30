@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import api from "../../api.js";
 
 const Leaderboard = () => {
   const [selectedYear, setSelectedYear] = useState("All Years");
@@ -14,7 +15,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+        const response = await api.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (response.data) {
@@ -33,7 +34,7 @@ const Leaderboard = () => {
 
   const getCourseName = async (user) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/course/${user.course}`);
+      const response = await api.get("/student/course/${user.course}");
       setCourseName(response.data.courseName);
       console.log(response);
     } catch (error) {
@@ -48,7 +49,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchAllStudents = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/getAllStudents`);
+        const response = await api.get("/student/getAllStudents");
         setLeaderboardData(response.data);
       } catch (error) {
         console.error("Failed to fetch all students:", error);

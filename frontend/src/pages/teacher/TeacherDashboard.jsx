@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
 import AddAssignment from "./AddAssignment";
 import AddSubjectData from "./AddSubjectData";
+import api from "../../api.js";
 
 const TeacherDashboard = () => {
   const [teacher, setTeacher] = useState(null);
@@ -12,7 +13,7 @@ const TeacherDashboard = () => {
   useEffect(() => {
     const fetchTeacherProfile = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
+        const response = await api.get("/user/teacher/profile", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

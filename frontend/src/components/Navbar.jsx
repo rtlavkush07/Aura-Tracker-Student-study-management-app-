@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { logout } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
-
+import api from "../api.js";
 const Navbar = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, token, role } = useSelector((state) => state.auth);
@@ -15,7 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+        const response = await api.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (response.data && response.data.userProfile) {

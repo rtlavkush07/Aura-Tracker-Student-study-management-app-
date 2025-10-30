@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../../api.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import {
   FaUserGraduate,
@@ -29,9 +30,9 @@ const AdminDashboard = () => {
     const fetchAllData = async () => {
       try {
         const [studentsRes, teachersRes, coursesRes] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_URL}/student/getAllStudents`),
-          axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllTeacher`),
-          axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllCourse`),
+          api.get("/student/getAllStudents"),
+          api.get("/admin/getAllTeacher"),
+          api.get("/admin/getAllCourse"),
         ]);
 
         setStudents(studentsRes.data);

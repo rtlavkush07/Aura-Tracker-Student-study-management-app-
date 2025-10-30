@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
 import SubjectModal from "./SubjectModal";
+import api from "../../api.js";
 
 const CourseSubjects = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const CourseSubjects = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+        const response = await api.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(response.data);
@@ -42,8 +43,8 @@ const CourseSubjects = () => {
     if (userId && courseId) {
       const fetchSubjects = async () => {
         try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/student/getCourseSubjects/${userId}/${courseId}`,
+          const response = await api.get(
+            "/student/getCourseSubjects/${userId}/${courseId}",
             {
               headers: { Authorization: `Bearer ${token}` },
             }

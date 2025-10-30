@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../../api.js";
 
 const TeacherProfile = () => {
   const [teacher, setTeacher] = useState(null);
@@ -8,7 +9,7 @@ const TeacherProfile = () => {
   useEffect(() => {
     const fetchTeacherProfile = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
+        const response = await api.get("/user/teacher/profile", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token for auth if required
           },

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import api from "../../api.js";
 
 const AddSubjectData = () => {
     const [subjects, setSubjects] = useState([]);
@@ -15,7 +16,7 @@ const AddSubjectData = () => {
     useEffect(() => {
         const fetchTeacherProfile = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
+                const response = await api.get("/user/teacher/profile", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token for auth if required
                     },
@@ -33,7 +34,7 @@ const AddSubjectData = () => {
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/teacher/getSubjects/${teacherId}`);
+                const response = await api.get(`/teacher/getSubjects/${teacherId}`);
 
 
                 setSubjects(response.data);
@@ -73,7 +74,7 @@ const AddSubjectData = () => {
 
         try {
             setLoading(true);
-            await axios.put(`${import.meta.env.VITE_API_URL}/teacher/${selectedSubject}/modules`, { modules: [moduleData] });
+            await api.put(`/teacher/${selectedSubject}/modules`, { modules: [moduleData] });
             alert('Module and chapters added successfully');
             setModuleName('');
             setChapters([]);

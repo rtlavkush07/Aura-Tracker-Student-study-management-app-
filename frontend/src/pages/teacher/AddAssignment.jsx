@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import api from "../../api.js";
+
 const AddAssignment = () => {
   const [assignments, setAssignments] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -24,7 +26,7 @@ const AddAssignment = () => {
   useEffect(() => {
     const fetchTeacherProfile = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/teacher/profile`, {
+        const response = await api.get("/user/teacher/profile", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token for auth if required
           },
@@ -81,7 +83,7 @@ const AddAssignment = () => {
     const fetchSubjects = async () => {
       try {
         if (teacherId) {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/teacher/getSubjects/${teacherId}`);
+          const response = await api.get(`/teacher/getSubjects/${teacherId}`);
           setSubjects(response.data);
         }
       } catch (error) {
@@ -117,7 +119,7 @@ const AddAssignment = () => {
       console.log(assignmentData)
       console.log('Adding assignment fucntion putting post request');
       const url =`${import.meta.env.VITE_API_URL}/teacher/${teacherId}/${subjectId}/addAssignment`;
-      const response = await axios.post(url, assignmentData);
+      const response = await api.post(url, assignmentData);
       console.log('Assignment added successfully:', response.data);
       alert('Assignment added successfully');
     } catch (error) {

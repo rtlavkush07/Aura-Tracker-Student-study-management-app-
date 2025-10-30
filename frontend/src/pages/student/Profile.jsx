@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../../api.js";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Profile = () => {
   const [courseName, setCourseName] = useState();
   const getCourseName = async (user) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/course/${user.course}`);
+      const response = await api.get(`/student/course/${user.course}`);
       setCourseName(response.data.courseName);
       console.log(response);
     } catch (error) {
@@ -26,7 +27,7 @@ const Profile = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
+        const response = await api.get("/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         await getCourseName(response.data);

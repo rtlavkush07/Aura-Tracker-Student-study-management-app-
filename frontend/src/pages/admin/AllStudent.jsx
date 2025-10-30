@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import api from "../../api.js";
 const AllStudent = () => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
     const fetchAllStudents = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/student/getAllStudents`);
+        const response = await api.get("/student/getAllStudents");
         setStudents(response.data);
         // console.log(response.data)
       } catch (error) {
